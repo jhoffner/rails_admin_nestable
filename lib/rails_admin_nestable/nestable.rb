@@ -56,15 +56,15 @@ module RailsAdmin
 
             if params['tree_nodes'].present?
               begin
-                ActiveRecord::Base.transaction do
-                  if @nestable_conf.tree?
-                    update_tree params[:tree_nodes]
-                  end
 
-                  if @nestable_conf.list?
-                    update_list params[:tree_nodes]
-                  end
+                if @nestable_conf.tree?
+                  update_tree params[:tree_nodes]
                 end
+
+                if @nestable_conf.list?
+                  update_list params[:tree_nodes]
+                end
+
                 message = "<strong>#{I18n.t('admin.actions.nestable.success')}!</strong>"
               rescue Exception => e
                 message = "<strong>#{I18n.t('admin.actions.nestable.error')}</strong>: #{e}"
